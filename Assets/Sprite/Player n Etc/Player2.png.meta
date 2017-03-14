@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 5d27232235426884b871b09414f66022
-timeCreated: 1489306409
+guid: 0d97e8af752dfca4a859804a7abdc57d
+timeCreated: 1489498980
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -27,20 +27,20 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 0
-    aniso: 1
-    mipBias: 0
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 3
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 4
+  spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -52,31 +52,7 @@ TextureImporter:
   platformSettings:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    textureFormat: 4
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Standalone
-    maxTextureSize: 2048
-    textureFormat: 4
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Android
-    maxTextureSize: 2048
-    textureFormat: 4
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: WebGL
-    maxTextureSize: 2048
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -85,11 +61,7 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline:
-    - - {x: -2, y: -2}
-      - {x: -2, y: 2}
-      - {x: 2, y: 2}
-      - {x: 2, y: -2}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
