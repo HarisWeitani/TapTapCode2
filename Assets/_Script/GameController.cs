@@ -61,18 +61,19 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPosition.z = 0.0f;
             //Instantiate(objectToSpawn, spawnPosition, Quaternion.Euler(new Vector3(0, 0, 0)));
+
+            //duit yang didapat sesuai software yang dimiliki
+            money += softwareTap[indexSoftware];
+
             Debug.Log("On Screen Click");
-            money += 100;
             Debug.Log("money " +money);
             Debug.Log("index CPU "+indexCPU);
         }
-
     }
 
     void OnApplicationQuit()
@@ -121,7 +122,7 @@ public class GameController : MonoBehaviour
     public void cpuIndex(int index)
     {
         Debug.Log("Money Now : Price Now = " + money + " " + priceCPU[index]);
-        if (money >= priceCPU[index])
+        if (money >= priceCPU[index] && indexCPU<index)
         {
             money -= priceCPU[index];
 
@@ -130,13 +131,13 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not Enough Money " + indexCPU);
+            Debug.Log("Can't Buy this shit" + indexCPU);
         }
     }
 
     public void gpuIndex(int index)
     {
-        if (money >= priceGPU[index])
+        if (money >= priceGPU[index] && indexGPU<index)
         {
             money -= priceGPU[index];
 
@@ -151,7 +152,7 @@ public class GameController : MonoBehaviour
 
     public void psuIndex(int index)
     {
-        if (money >= pricePSU[index])
+        if (money >= pricePSU[index] && indexPSU < index)
         {
             money -= pricePSU[index];
 
@@ -167,7 +168,7 @@ public class GameController : MonoBehaviour
 
     public void ramIndex(int index)
     {
-        if (money >= priceRAM[index])
+        if (money >= priceRAM[index] && indexRAM < index)
         {
             money -= priceRAM[index];
 
@@ -182,7 +183,7 @@ public class GameController : MonoBehaviour
 
     public void softwareIndex(int index)
     {
-        if(money >= priceSoftware[index])
+        if(money >= priceSoftware[index] && indexSoftware <index )
         {
             money -= priceSoftware[index];
 
