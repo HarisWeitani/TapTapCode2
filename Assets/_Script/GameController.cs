@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//buy logic moved here
 public class GameController : MonoBehaviour
 {
-
     //public GameObject objectToSpawn;
 
     //item variable
@@ -18,14 +18,23 @@ public class GameController : MonoBehaviour
     //software income/tap
     private int[] softwareTap = new int[] { 50, 100, 150, 200, 250 };
 
+    //item price
+    private int[] priceCPU = new int[] { 100, 300, 500, 700, 900 };
+    private int[] priceGPU = new int[] { 100, 300, 500, 700, 900 };
+    private int[] pricePSU = new int[] { 100, 300, 500, 700, 900 };
+    private int[] priceRAM = new int[] { 100, 300, 500, 700, 900 };
+
+    //software price
+    private int[] priceSoftware = new int[] { 200, 400, 600, 800, 1000 };
+    //ada req buat beli software
 
     //menyimpan data index buat saving
-    private int indexCPU;
-    private int indexGPU;
-    private int indexPSU;
-    private int indexRAM;
+    public int indexCPU;
+    public int indexGPU;
+    public int indexPSU;
+    public int indexRAM;
 
-    private int indexSoftware;
+    public int indexSoftware;
 
     //key buat save
     private string saveData = "HasKey";
@@ -55,7 +64,6 @@ public class GameController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            
             Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPosition.z = 0.0f;
             //Instantiate(objectToSpawn, spawnPosition, Quaternion.Euler(new Vector3(0, 0, 0)));
@@ -73,24 +81,13 @@ public class GameController : MonoBehaviour
         Debug.Log("On Application Quit Save");
     }
 
+    //save logic start
     void Save()
     {
-        //access ButtonManager Variable
-        GameObject indexing = GameObject.Find("ButtonManager");
-        ButtonManager btnManager = indexing.GetComponent<ButtonManager>();
-
-        indexCPU = btnManager.indexCPU;
-        indexGPU = btnManager.indexGPU;
-        indexPSU = btnManager.indexPSU;
-        indexRAM = btnManager.indexRAM;
-
-        indexSoftware = btnManager.indexSoftware;
-        
         //save money&happiness
         PlayerPrefs.SetInt("moneyKey", money);
         PlayerPrefs.SetFloat("hepiKey",happiness);
 
-        
         //save upgradean
         checkSave = 1;
         PlayerPrefs.SetInt(saveData, checkSave);
@@ -118,8 +115,86 @@ public class GameController : MonoBehaviour
         indexSoftware = PlayerPrefs.GetInt("swKey");
         Debug.Log("Load Data index cpu "+indexCPU);
     }
+    //save logic end
 
+    //buy logic start
+    public void cpuIndex(int index)
+    {
+        Debug.Log("Money Now : Price Now = " + money + " " + priceCPU[index]);
+        if (money >= priceCPU[index])
+        {
+            money -= priceCPU[index];
 
+            indexCPU = index;
+            Debug.Log("Buy Succeed Your money : " + money);
+        }
+        else
+        {
+            Debug.Log("Not Enough Money " + indexCPU);
+        }
+    }
+
+    public void gpuIndex(int index)
+    {
+        if (money >= priceGPU[index])
+        {
+            money -= priceGPU[index];
+
+            indexGPU = index;
+            Debug.Log("Buy Succeed;");
+        }
+        else
+        {
+            Debug.Log("Not Enough Money");
+        }
+    }
+
+    public void psuIndex(int index)
+    {
+        if (money >= pricePSU[index])
+        {
+            money -= pricePSU[index];
+
+            indexPSU = index;
+            Debug.Log("Buy Succeed;");
+        }
+        else
+        {
+            Debug.Log("Not Enough Money");
+        }
+
+    }
+
+    public void ramIndex(int index)
+    {
+        if (money >= priceRAM[index])
+        {
+            money -= priceRAM[index];
+
+            indexRAM = index;
+            Debug.Log("Buy Succeed");
+        }
+        else
+        {
+            Debug.Log("Not Enough Money");
+        }
+    }
+
+    public void softwareIndex(int index)
+    {
+        if(money >= priceSoftware[index])
+        {
+            money -= priceSoftware[index];
+
+            indexSoftware = index;
+            Debug.Log("Buy Succeed");
+        }
+        else
+        {
+            Debug.Log("Not Enough Money");
+        }
+    }
+    //buy logic end
 
 }
 

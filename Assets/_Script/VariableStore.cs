@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Obsolete Script
 public class VariableStore : MonoBehaviour
 {
 
