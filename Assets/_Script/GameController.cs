@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
     private int[] RAM = new int[] { 13, 23, 33, 43, 53 };
     //software income/tap
     private int[] softwareTap = new int[] { 50, 100, 150, 200, 250 };
+    private int[] softwarePassive = new int[] { 50, 100, 150, 200, 250};
 
     //item price
     private int[] priceCPU = new int[] { 100, 300, 500, 700, 900 };
@@ -41,12 +42,16 @@ public class GameController : MonoBehaviour
     private int indexRAM;
     
     private int indexSoftware;
-
+    //private int indexSoftwarePassive;
 
     //key buat save
     private string saveData = "HasKey";
     //cek ada save data/ga
     private int checkSave; //gw ga ngerti knp valuenya 0 terus , tapi ini bekerja jadi jangan ditanyakan #taboo
+
+    //delta time
+    private float period = 0.0f;
+
 
     void Start()
     {
@@ -69,6 +74,14 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+
+        if (period > 1)
+        {
+            money += softwarePassive[indexSoftware];
+            period = 0;
+        }
+        period += UnityEngine.Time.deltaTime;
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -106,6 +119,8 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("ramKey",indexRAM);
 
         PlayerPrefs.SetInt("swKey", indexSoftware);
+        //PlayerPrefs.SetInt("swpKey", indexSoftwarePassive);
+
         Debug.Log("Save Data index cpu " + indexCPU);
     }
 
@@ -122,6 +137,8 @@ public class GameController : MonoBehaviour
         indexRAM = PlayerPrefs.GetInt("ramKey");
 
         indexSoftware = PlayerPrefs.GetInt("swKey");
+        //indexSoftwarePassive = PlayerPrefs.GetInt("swpKey");
+
         Debug.Log("Load Data index cpu "+indexCPU);
     }
     //save Load logic end
@@ -204,6 +221,7 @@ public class GameController : MonoBehaviour
             money -= priceSoftware[index];
 
             indexSoftware = index;
+            //indexSoftwarePassive = index;
             Debug.Log("Buy Succeed");
         }
         else

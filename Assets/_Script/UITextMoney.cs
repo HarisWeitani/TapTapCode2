@@ -26,7 +26,7 @@ public class UITextMoney : MonoBehaviour {
         GameObject money = GameObject.Find("GameController");
         GameController moneyCount = money.GetComponent<GameController>();
 
-        moneyText.text = moneyCount.money.ToString() + ": Money";
+        moneyText.text = "Rp: "+moneyCount.money.ToString();
 
     }
 
