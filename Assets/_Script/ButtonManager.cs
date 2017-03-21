@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 
 public class ButtonManager : MonoBehaviour
-{
-
+{ 
     //buat tombol hw dan sw
     public void hardwareBtn(string level)
     {

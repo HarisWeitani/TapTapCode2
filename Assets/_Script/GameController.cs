@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//buy logic moved here
+//Todo List:
+//status bar sw & hw
+
+//buat mele
+//kata dino shop digabung
+
+
 public class GameController : MonoBehaviour
 {
     //public GameObject objectToSpawn;
@@ -29,12 +35,13 @@ public class GameController : MonoBehaviour
     //ada req buat beli software
 
     //menyimpan data index buat saving
-    public int indexCPU;
-    public int indexGPU;
-    public int indexPSU;
-    public int indexRAM;
+    private int indexCPU;
+    private int indexGPU;
+    private int indexPSU;
+    private int indexRAM;
+    
+    private int indexSoftware;
 
-    public int indexSoftware;
 
     //key buat save
     private string saveData = "HasKey";
@@ -44,7 +51,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         //PlayerPrefs.DeleteAll();
-
+        
         if (PlayerPrefs.HasKey(saveData))
         {
             Debug.Log("Load save data "+ saveData +" "+checkSave);
@@ -57,6 +64,7 @@ public class GameController : MonoBehaviour
             Debug.Log("create new Save " + saveData + " " + checkSave);
             Save();
         }
+        
     }
 
     void Update()
@@ -82,7 +90,7 @@ public class GameController : MonoBehaviour
         Debug.Log("On Application Quit Save");
     }
 
-    //save logic start
+    //save Load logic start
     void Save()
     {
         //save money&happiness
@@ -116,7 +124,7 @@ public class GameController : MonoBehaviour
         indexSoftware = PlayerPrefs.GetInt("swKey");
         Debug.Log("Load Data index cpu "+indexCPU);
     }
-    //save logic end
+    //save Load logic end
 
     //buy logic start
     public void cpuIndex(int index)
@@ -137,6 +145,8 @@ public class GameController : MonoBehaviour
 
     public void gpuIndex(int index)
     {
+        Debug.Log("Money Now : Price Now = " + money + " " + priceGPU[index]);
+
         if (money >= priceGPU[index] && indexGPU<index)
         {
             money -= priceGPU[index];
@@ -152,6 +162,8 @@ public class GameController : MonoBehaviour
 
     public void psuIndex(int index)
     {
+        Debug.Log("Money Now : Price Now = " + money + " " + pricePSU[index]);
+
         if (money >= pricePSU[index] && indexPSU < index)
         {
             money -= pricePSU[index];
@@ -168,6 +180,8 @@ public class GameController : MonoBehaviour
 
     public void ramIndex(int index)
     {
+        Debug.Log("Money Now : Price Now = " + money + " " + priceRAM[index]);
+
         if (money >= priceRAM[index] && indexRAM < index)
         {
             money -= priceRAM[index];
@@ -183,7 +197,9 @@ public class GameController : MonoBehaviour
 
     public void softwareIndex(int index)
     {
-        if(money >= priceSoftware[index] && indexSoftware <index )
+        Debug.Log("Money Now : Price Now = " + money + " " + priceSoftware[index]);
+
+        if (money >= priceSoftware[index] && indexSoftware <index )
         {
             money -= priceSoftware[index];
 
