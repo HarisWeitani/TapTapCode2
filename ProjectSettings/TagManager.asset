@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Wallpaper
+    uniqueID: 3875211751
+    locked: 0
+  - name: Background
+    uniqueID: 3301142187
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
