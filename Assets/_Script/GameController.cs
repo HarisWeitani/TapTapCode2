@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Todo List:
-//status bar sw & hw
-
-//buat mele
-//kata dino shop digabung
-
-
 public class GameController : MonoBehaviour
 {
     //public GameObject objectToSpawn;
@@ -17,30 +10,30 @@ public class GameController : MonoBehaviour
     public int money;
     private float happiness;
     //tdpnya
-    private int[] CPU = new int[] { 10, 20, 30, 40, 50 };
-    private int[] GPU = new int[] { 11, 21, 31, 41, 51 };
-    private int[] PSU = new int[] { 12, 22, 32, 42, 52 };
-    private int[] RAM = new int[] { 13, 23, 33, 43, 53 };
+    private int[] CPU = new int[] { 0, 65, 75, 85, 95, 125, 150 };
+    private int[] GPU = new int[] { 0, 35, 40, 75, 90, 100, 120, 150, 200 };
+    private int[] PSU = new int[] { 0, 300, 400, 550, 650, 750, 850, 1000 };
+    private int[] RAM = new int[] { 0, 5, 5, 5, 5, 5, 5 };
     //software income/tap
-    private int[] softwareTap = new int[] { 50, 100, 150, 200, 250 };
-    private int[] softwarePassive = new int[] { 50, 100, 150, 200, 250};
+    private int[] softwareTap = new int[] { 10, 15, 30, 50, 100, 150, 200, 300, 300, 400, 500 };
+    private int[] softwarePassive = new int[] { 25, 50, 100, 250, 500 };
 
     //item price
-    private int[] priceCPU = new int[] { 100, 300, 500, 700, 900 };
-    private int[] priceGPU = new int[] { 100, 300, 500, 700, 900 };
-    private int[] pricePSU = new int[] { 100, 300, 500, 700, 900 };
-    private int[] priceRAM = new int[] { 100, 300, 500, 700, 900 };
+    private int[] priceCPU = new int[] { 0, 500, 1000, 3000, 5000, 7500, 10000 };
+    private int[] priceGPU = new int[] { 0, 750, 1500, 3000, 5000, 8000, 10000, 15000, 20000 };
+    private int[] pricePSU = new int[] { 0, 100, 300, 1000, 1500, 1750, 2000, 3000 };
+    private int[] priceRAM = new int[] { 0, 125, 250, 500, 750, 1000, 1500 };
 
     //software price
-    private int[] priceSoftware = new int[] { 200, 400, 600, 800, 1000 };
+    private int[] priceSoftware = new int[] { 0, 200, 400, 600, 800, 1000 };
     //ada req buat beli software
 
     //menyimpan data index buat saving
-    private int indexCPU;
-    private int indexGPU;
-    private int indexPSU;
-    private int indexRAM;
-    
+    public int indexCPU;
+    public int indexGPU;
+    public int indexPSU;
+    public int indexRAM;
+
     private int indexSoftware;
     //private int indexSoftwarePassive;
 
@@ -56,12 +49,12 @@ public class GameController : MonoBehaviour
     void Start()
     {
         //PlayerPrefs.DeleteAll();
-        
+
         if (PlayerPrefs.HasKey(saveData))
         {
-            Debug.Log("Load save data "+ saveData +" "+checkSave);
+            Debug.Log("Load save data " + saveData + " " + checkSave);
             Load();
-            Debug.Log("cpu index " +indexCPU);
+            Debug.Log("cpu index " + indexCPU);
         }
         else
         {
@@ -69,7 +62,7 @@ public class GameController : MonoBehaviour
             Debug.Log("create new Save " + saveData + " " + checkSave);
             Save();
         }
-        
+
     }
 
     void Update()
@@ -92,8 +85,8 @@ public class GameController : MonoBehaviour
             money += softwareTap[indexSoftware];
 
             Debug.Log("On Screen Click");
-            Debug.Log("money " +money);
-            Debug.Log("index CPU "+indexCPU);
+            Debug.Log("money " + money);
+            Debug.Log("index CPU " + indexCPU);
         }
     }
 
@@ -108,15 +101,15 @@ public class GameController : MonoBehaviour
     {
         //save money&happiness
         PlayerPrefs.SetInt("moneyKey", money);
-        PlayerPrefs.SetFloat("hepiKey",happiness);
+        PlayerPrefs.SetFloat("hepiKey", happiness);
 
         //save upgradean
         checkSave = 1;
         PlayerPrefs.SetInt(saveData, checkSave);
-        PlayerPrefs.SetInt("cpuKey",indexCPU);
-        PlayerPrefs.SetInt("gpuKey",indexGPU);
-        PlayerPrefs.SetInt("psuKey",indexPSU);
-        PlayerPrefs.SetInt("ramKey",indexRAM);
+        PlayerPrefs.SetInt("cpuKey", indexCPU);
+        PlayerPrefs.SetInt("gpuKey", indexGPU);
+        PlayerPrefs.SetInt("psuKey", indexPSU);
+        PlayerPrefs.SetInt("ramKey", indexRAM);
 
         PlayerPrefs.SetInt("swKey", indexSoftware);
         //PlayerPrefs.SetInt("swpKey", indexSoftwarePassive);
@@ -127,8 +120,8 @@ public class GameController : MonoBehaviour
     void Load()
     {
         //load money&happiness
-        money= PlayerPrefs.GetInt("moneyKey");
-        happiness= PlayerPrefs.GetFloat("hepiKey");
+        money = PlayerPrefs.GetInt("moneyKey");
+        happiness = PlayerPrefs.GetFloat("hepiKey");
 
         //load upgradean
         indexCPU = PlayerPrefs.GetInt("cpuKey");
@@ -139,7 +132,7 @@ public class GameController : MonoBehaviour
         indexSoftware = PlayerPrefs.GetInt("swKey");
         //indexSoftwarePassive = PlayerPrefs.GetInt("swpKey");
 
-        Debug.Log("Load Data index cpu "+indexCPU);
+        Debug.Log("Load Data index cpu " + indexCPU);
     }
     //save Load logic end
 
@@ -147,7 +140,7 @@ public class GameController : MonoBehaviour
     public void cpuIndex(int index)
     {
         Debug.Log("Money Now : Price Now = " + money + " " + priceCPU[index]);
-        if (money >= priceCPU[index] && indexCPU<index)
+        if (money >= priceCPU[index] && indexCPU < index)
         {
             money -= priceCPU[index];
 
@@ -164,7 +157,7 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Money Now : Price Now = " + money + " " + priceGPU[index]);
 
-        if (money >= priceGPU[index] && indexGPU<index)
+        if (money >= priceGPU[index] && indexGPU < index)
         {
             money -= priceGPU[index];
 
@@ -216,7 +209,7 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Money Now : Price Now = " + money + " " + priceSoftware[index]);
 
-        if (money >= priceSoftware[index] && indexSoftware <index )
+        if (money >= priceSoftware[index] && indexSoftware < index)
         {
             money -= priceSoftware[index];
 

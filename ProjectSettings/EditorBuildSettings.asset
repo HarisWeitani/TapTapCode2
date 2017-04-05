@@ -7,7 +7,3 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/_Scene/Main Game.unity
-  - enabled: 1
-    path: Assets/_Scene/Hardware.unity
-  - enabled: 1
-    path: Assets/_Scene/Software.unity
