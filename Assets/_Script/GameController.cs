@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     private int[] priceRAM = new int[] { 0, 125, 250, 500, 750, 1000, 1500 };
 
     //software price
-    private int[] priceSoftware = new int[] { 0, 200, 400, 600, 800, 1000 };
+    private int[] priceSoftware = new int[] { 0, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600 };
     //ada req buat beli software
 
     //menyimpan data index buat saving
@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
     public int indexPSU;
     public int indexRAM;
 
-    private int indexSoftware;
+    public int indexSoftware;
     //private int indexSoftwarePassive;
 
     //key buat save
@@ -48,9 +48,9 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
 
-        if (PlayerPrefs.HasKey(saveData))
+        /*if (PlayerPrefs.HasKey(saveData))
         {
             Debug.Log("Load save data " + saveData + " " + checkSave);
             Load();
@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
             checkSave = 0;
             Debug.Log("create new Save " + saveData + " " + checkSave);
             Save();
-        }
+        }*/
 
     }
 
@@ -215,11 +215,11 @@ public class GameController : MonoBehaviour
 
             indexSoftware = index;
             //indexSoftwarePassive = index;
-            Debug.Log("Buy Succeed");
+            Debug.Log("Buy Succeed " + money + " " + indexSoftware );
         }
         else
         {
-            Debug.Log("Not Enough Money");
+            Debug.Log("Not Enough Money " + indexSoftware);
         }
     }
     //buy logic end
