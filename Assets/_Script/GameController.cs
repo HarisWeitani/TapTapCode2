@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     private int[] priceRAM = new int[] { 0, 125, 250, 500, 750, 1000, 1500 };
 
     //software price
-    private int[] priceSoftware = new int[] { 0, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600 };
+    private int[] priceSoftware = new int[] { 0, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600 , 2800 };
     //ada req buat beli software
 
     //menyimpan data index buat saving
