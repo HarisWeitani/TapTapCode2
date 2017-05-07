@@ -15,8 +15,12 @@ public class GameController : MonoBehaviour
     private int[] PSU = new int[] { 0, 300, 400, 550, 650, 750, 850, 1000 };
     private int[] RAM = new int[] { 0, 5, 5, 5, 5, 5, 5 };
     //software income/tap
-    private int[] softwareTap = new int[] { 10, 15, 30, 50, 100, 150, 200, 300, 300, 400, 500 };
-    private int[] softwarePassive = new int[] { 25, 50, 100, 250, 500 };
+    private int[] softwareTap = new int[] { 10, 15, 30, 50, 100,
+                                            150, 200, 250, 300, 350,
+                                            400, 450, 500, 550, 600,1000};
+    private int[] softwarePassive = new int[] { 25, 50, 100, 200, 400,
+                                                500,600,700,800,900,
+                                                1000,1100,1200,1300,1400,1500 };
 
     //item price
     private int[] priceCPU = new int[] { 0, 500, 1000, 3000, 5000, 7500, 10000 };
@@ -25,7 +29,9 @@ public class GameController : MonoBehaviour
     private int[] priceRAM = new int[] { 0, 125, 250, 500, 750, 1000, 1500 };
 
     //software price
-    private int[] priceSoftware = new int[] { 0, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600 , 2800 };
+    private int[] priceSoftware = new int[] { 0, 200, 400, 600, 800,
+                                             1000, 1200, 1400, 1600, 1800,
+                                            2000, 2200, 2400, 2600, 2800, 3000 };
     //ada req buat beli software
 
     //menyimpan data index buat saving
@@ -215,7 +221,7 @@ public class GameController : MonoBehaviour
 
             indexSoftware = index;
             //indexSoftwarePassive = index;
-            Debug.Log("Buy Succeed " + money + " " + indexSoftware );
+            Debug.Log("Buy Succeed " + money + " " + indexSoftware);
         }
         else
         {
