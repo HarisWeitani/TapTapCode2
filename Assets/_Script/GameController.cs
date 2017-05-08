@@ -52,6 +52,13 @@ public class GameController : MonoBehaviour
     //delta time
     private float period = 0.0f;
 
+    //PopUp Text
+    public GameObject popUpHw;
+    public GameObject popUpSw;
+    public Canvas canvasHw;
+    public Canvas canvasSw;
+    private Vector3 position = new Vector3();
+
 
     void Start()
     {
@@ -156,6 +163,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            PopUpHw();
             Debug.Log("Can't Buy this shit" + indexCPU);
         }
     }
@@ -173,6 +181,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            PopUpHw();
             Debug.Log("Not Enough Money");
         }
     }
@@ -190,6 +199,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            PopUpHw();
             Debug.Log("Not Enough Money");
         }
 
@@ -208,6 +218,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            PopUpHw();
             Debug.Log("Not Enough Money");
         }
     }
@@ -226,11 +237,29 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            PopUpSw();
             Debug.Log("Not Enough Money " + indexSoftware);
         }
     }
     //buy logic end
 
+    public void PopUpHw()
+    {
+        position = new Vector3(380, -180, 0);
+        GameObject inst = (GameObject)Instantiate(popUpHw, position, Quaternion.identity);
+        inst.transform.SetParent(canvasHw.transform, false);
+        inst.transform.localScale = new Vector3(2, 2, 2);
+        Destroy(inst, 1.0f);
+    }
+
+    public void PopUpSw()
+    {
+        position = new Vector3(400, -135, 0);
+        GameObject inst = (GameObject)Instantiate(popUpSw, position, Quaternion.identity);
+        inst.transform.SetParent(canvasSw.transform, false);
+        inst.transform.localScale = new Vector3(2, 2, 2);
+        Destroy(inst, 1.0f);
+    }
 }
 
 // turbo
