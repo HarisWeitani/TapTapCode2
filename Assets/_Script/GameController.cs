@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// TODO LIST : ada req buat beli software
 
 public class GameController : MonoBehaviour
 {
@@ -19,20 +20,20 @@ public class GameController : MonoBehaviour
                                             150, 200, 250, 300, 350,
                                             400, 450, 500, 550, 600,1000};
     private int[] softwarePassive = new int[] { 25, 50, 100, 200, 400,
-                                                500,600,700,800,900,
-                                                1000,1100,1200,1300,1400,1500 };
+                                                500, 600, 700, 800, 900,
+                                                1000, 1100, 1200, 1300, 1400, 1500 };
 
     //item price
-    private int[] priceCPU = new int[] { 0, 500, 1000, 3000, 5000, 7500, 10000 };
+    private int[] priceCPU = new int[] { 0, 1000, 3000, 5000, 7500, 10000 };
     private int[] priceGPU = new int[] { 0, 750, 1500, 3000, 5000, 8000, 10000, 15000, 20000 };
-    private int[] pricePSU = new int[] { 0, 100, 300, 1000, 1500, 1750, 2000, 3000 };
+    private int[] pricePSU = new int[] { 0, 300, 1000, 1500, 1750, 2000, 3000 };
     private int[] priceRAM = new int[] { 0, 125, 250, 500, 750, 1000, 1500 };
 
     //software price
-    private int[] priceSoftware = new int[] { 0, 200, 400, 600, 800,
-                                             1000, 1200, 1400, 1600, 1800,
-                                            2000, 2200, 2400, 2600, 2800, 3000 };
-    //ada req buat beli software
+    private int[] priceSoftware = new int[] { 0, 2000, 3000, 3500, 4500,
+                                             5500, 5000, 6500, 7500, 6000,
+                                            7750, 8500, 7500, 8000, 10000 };
+
 
     //menyimpan data index buat saving
     public int indexCPU;
