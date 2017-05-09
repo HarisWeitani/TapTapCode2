@@ -10,12 +10,13 @@ public class GameController : MonoBehaviour
     //item variable
     public int money;
     private float happiness;
-    //tdpnya
-    private int[] CPU = new int[] { 0, 65, 75, 85, 95, 125, 150 };
+    //tdpnya | Not used YET
+    private int[] CPU = new int[] { 0, 75, 150, 95, 125, 150 };
     private int[] GPU = new int[] { 0, 35, 40, 75, 90, 100, 120, 150, 200 };
-    private int[] PSU = new int[] { 0, 300, 400, 550, 650, 750, 850, 1000 };
+    private int[] PSU = new int[] { 0, 400, 550, 650, 750, 850, 1000 };
     private int[] RAM = new int[] { 0, 5, 5, 5, 5, 5, 5 };
-    //software income/tap
+
+    //software income tap
     private int[] softwareTap = new int[] { 10, 15, 30, 50, 100,
                                             150, 200, 250, 300, 350,
                                             400, 450, 500, 550, 600,1000};
@@ -33,7 +34,6 @@ public class GameController : MonoBehaviour
     private int[] priceSoftware = new int[] { 0, 2000, 3000, 3500, 4500,
                                              5500, 5000, 6500, 7500, 6000,
                                             7750, 8500, 7500, 8000, 10000 };
-
 
     //menyimpan data index buat saving
     public int indexCPU;
@@ -156,6 +156,7 @@ public class GameController : MonoBehaviour
         Debug.Log("Money Now : Price Now = " + money + " " + priceCPU[index]);
         if (money >= priceCPU[index] && indexCPU < index)
         {
+
             money -= priceCPU[index];
 
             indexCPU = index;
@@ -195,6 +196,7 @@ public class GameController : MonoBehaviour
             money -= pricePSU[index];
 
             indexPSU = index;
+
             Debug.Log("Buy Succeed;");
         }
         else
@@ -214,6 +216,7 @@ public class GameController : MonoBehaviour
             money -= priceRAM[index];
 
             indexRAM = index;
+
             Debug.Log("Buy Succeed");
         }
         else
@@ -243,6 +246,7 @@ public class GameController : MonoBehaviour
     }
     //buy logic end
 
+    //Pop Up Start
     public void PopUpHw()
     {
         position = new Vector3(380, -180, 0);
@@ -260,6 +264,8 @@ public class GameController : MonoBehaviour
         inst.transform.localScale = new Vector3(2, 2, 2);
         Destroy(inst, 1.0f);
     }
+    //Pop Up end
+
 }
 
 // turbo
