@@ -62,9 +62,9 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
-        /*if (PlayerPrefs.HasKey(saveData))
+        if (PlayerPrefs.HasKey(saveData))
         {
             Debug.Log("Load save data " + saveData + " " + checkSave);
             Load();
@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
             checkSave = 0;
             Debug.Log("create new Save " + saveData + " " + checkSave);
             Save();
-        }*/
+        }
 
     }
 
