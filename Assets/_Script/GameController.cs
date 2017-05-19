@@ -57,7 +57,6 @@ public class GameController : MonoBehaviour
     public GameObject popUpSw;
     public Canvas canvasHw;
     public Canvas canvasSw;
-    private Vector3 position = new Vector3();
 
 
     void Start()
@@ -89,7 +88,7 @@ public class GameController : MonoBehaviour
         }
         period += UnityEngine.Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0))
+        if (screenLeftClicked())
         {
             Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPosition.z = 0.0f;
@@ -104,6 +103,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private static bool screenLeftClicked()
+    {
+        return Input.GetMouseButtonDown(0);
+    }
+
     void OnApplicationQuit()
     {
         Save();
@@ -113,10 +117,15 @@ public class GameController : MonoBehaviour
     //save Load logic start
     void Save()
     {
-        //save money&happiness
-        PlayerPrefs.SetInt("moneyKey", money);
-        PlayerPrefs.SetFloat("hepiKey", happiness);
+        SaveMoneyAndHappiness();
+        SaveUpgrades();
+        //PlayerPrefs.SetInt("swpKey", indexSoftwarePassive);
 
+        Debug.Log("Save Data index cpu " + indexCPU);
+    }
+
+    private void SaveUpgrades()
+    {
         //save upgradean
         checkSave = 1;
         PlayerPrefs.SetInt(saveData, checkSave);
@@ -126,17 +135,26 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("ramKey", indexRAM);
 
         PlayerPrefs.SetInt("swKey", indexSoftware);
-        //PlayerPrefs.SetInt("swpKey", indexSoftwarePassive);
+    }
 
-        Debug.Log("Save Data index cpu " + indexCPU);
+    private void SaveMoneyAndHappiness()
+    {
+        //save money&happiness
+        PlayerPrefs.SetInt("moneyKey", money);
+        PlayerPrefs.SetFloat("hepiKey", happiness);
     }
 
     void Load()
     {
-        //load money&happiness
-        money = PlayerPrefs.GetInt("moneyKey");
-        happiness = PlayerPrefs.GetFloat("hepiKey");
+        LoadMoneyAndHappiness();
+        LoadUpgrades();
+        //indexSoftwarePassive = PlayerPrefs.GetInt("swpKey");
 
+        Debug.Log("Load Data index cpu " + indexCPU);
+    }
+
+    private void LoadUpgrades()
+    {
         //load upgradean
         indexCPU = PlayerPrefs.GetInt("cpuKey");
         indexGPU = PlayerPrefs.GetInt("gpuKey");
@@ -144,17 +162,22 @@ public class GameController : MonoBehaviour
         indexRAM = PlayerPrefs.GetInt("ramKey");
 
         indexSoftware = PlayerPrefs.GetInt("swKey");
-        //indexSoftwarePassive = PlayerPrefs.GetInt("swpKey");
-
-        Debug.Log("Load Data index cpu " + indexCPU);
     }
+
+    private void LoadMoneyAndHappiness()
+    {
+        //load money&happiness
+        money = PlayerPrefs.GetInt("moneyKey");
+        happiness = PlayerPrefs.GetFloat("hepiKey");
+    }
+
     //save Load logic end
 
     //buy logic start
     public void cpuIndex(int index)
     {
-        Debug.Log("Money Now : Price Now = " + money + " " + priceCPU[index]);
-        if (money >= priceCPU[index] && indexCPU < index)
+        LogMoneyWithPrice(priceCPU[index]);
+        if (isMoneyEnoughToBuy(priceCPU[index]) && indexCPU < index)
         {
 
             money -= priceCPU[index];
@@ -169,11 +192,21 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void LogMoneyWithPrice(int priceIndex)
+    {
+        Debug.Log("Money Now : Price Now = " + money + " " + priceIndex);
+    }
+
+    private bool isMoneyEnoughToBuy(int price)
+    {
+        return money >= price;
+    }
+
     public void gpuIndex(int index)
     {
-        Debug.Log("Money Now : Price Now = " + money + " " + priceGPU[index]);
+        LogMoneyWithPrice(priceGPU[index]);
 
-        if (money >= priceGPU[index] && indexGPU < index)
+        if (isMoneyEnoughToBuy(priceGPU[index]) && indexGPU < index)
         {
             money -= priceGPU[index];
 
@@ -189,9 +222,9 @@ public class GameController : MonoBehaviour
 
     public void psuIndex(int index)
     {
-        Debug.Log("Money Now : Price Now = " + money + " " + pricePSU[index]);
+        LogMoneyWithPrice(pricePSU[index]);
 
-        if (money >= pricePSU[index] && indexPSU < index)
+        if (isMoneyEnoughToBuy(pricePSU[index]) && indexPSU < index)
         {
             money -= pricePSU[index];
 
@@ -209,9 +242,9 @@ public class GameController : MonoBehaviour
 
     public void ramIndex(int index)
     {
-        Debug.Log("Money Now : Price Now = " + money + " " + priceRAM[index]);
+        LogMoneyWithPrice(priceRAM[index]);
 
-        if (money >= priceRAM[index] && indexRAM < index)
+        if (isMoneyEnoughToBuy(priceRAM[index]) && indexRAM < index)
         {
             money -= priceRAM[index];
 
@@ -228,9 +261,9 @@ public class GameController : MonoBehaviour
 
     public void softwareIndex(int index)
     {
-        Debug.Log("Money Now : Price Now = " + money + " " + priceSoftware[index]);
+        LogMoneyWithPrice(priceSoftware[index]);
 
-        if (money >= priceSoftware[index] && indexSoftware < index)
+        if (isMoneyEnoughToBuy(priceSoftware[index]) && indexSoftware < index)
         {
             money -= priceSoftware[index];
 
@@ -247,22 +280,24 @@ public class GameController : MonoBehaviour
     //buy logic end
 
     //Pop Up Start
-    public void PopUpHw()
+    public void showPopUp(GameObject popupItem, Vector3 position)
     {
-        position = new Vector3(380, -180, 0);
-        GameObject inst = (GameObject)Instantiate(popUpHw, position, Quaternion.identity);
+        GameObject inst = Instantiate(popupItem, position, Quaternion.identity);
         inst.transform.SetParent(canvasHw.transform, false);
         inst.transform.localScale = new Vector3(2, 2, 2);
         Destroy(inst, 1.0f);
     }
 
+    public void PopUpHw()
+    {
+        Vector3 position = new Vector3(380, -180, 0);
+        showPopUp(popUpHw, position);
+    }
+
     public void PopUpSw()
     {
-        position = new Vector3(400, -135, 0);
-        GameObject inst = (GameObject)Instantiate(popUpSw, position, Quaternion.identity);
-        inst.transform.SetParent(canvasSw.transform, false);
-        inst.transform.localScale = new Vector3(2, 2, 2);
-        Destroy(inst, 1.0f);
+        Vector3 position = new Vector3(400, -135, 0);
+        showPopUp(popUpSw, position);
     }
     //Pop Up end
 

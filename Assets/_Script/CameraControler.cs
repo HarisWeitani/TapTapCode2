@@ -9,12 +9,12 @@ public class CameraControler : MonoBehaviour
 
     public void moveCameraToHardware()
     {
-        this.transform.position = new Vector3((float)-6.25, 0, -10);
+        this.transform.position = new Vector3(-6.25f, 0, -10);
     }
 
     public void moveCameraToSoftware()
     {
-        this.transform.position = new Vector3((float)6.25, 0, -10);
+        this.transform.position = new Vector3(6.25f, 0, -10);
     }
 
     public void moveCameraToMain()
